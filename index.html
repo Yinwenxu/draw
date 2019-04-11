@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>旭の画画板</title>
+    <style>
+        #toolbar {
+            background: #e6eff7;
+            padding: 5px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #info {
+            position: absolute;
+            background: #000000;
+            text-align: center;
+            color: #ffffff;
+            font-family: "Arial";
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            padding: 50px;
+            width: 50%;
+            height: 50%;
+            opacity: .7;
+        }
+
+
+        #col1 {
+            flex-flow: column wrap;
+            margin: 5px;
+        }
+
+        #col2 {
+            flex-flow: column wrap;
+            margin: 5px;
+        }
+
+        #col3 {
+            flex-flow: column wrap;
+            margin: 5px;
+        }
+
+        .textField button {
+            margin-top: 5px;
+            vertical-align: middle;
+            text-align: center;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-family: "Arial";
+            line-height: 10px;
+            border: 0;
+            color: #ffffff;
+        }
+
+        .textField button:nth-of-type(1),
+        .textField button:nth-of-type(2),
+        .textField button:nth-of-type(3) {
+            background: #4a82b5;
+        }
+
+        .textField button:nth-of-type(1) {
+            font-size: 10px;
+        }
+
+        .textField button:nth-of-type(2) {
+            font-size: 13px;
+        }
+
+        .textField button:nth-of-type(3) {
+            font-size: 17px;
+        }
+
+        .textField button:nth-of-type(1):hover,
+        .textField button:nth-of-type(2):hover,
+        .textField button:nth-of-type(3):hover {
+            background: #e6eff7;
+            color: #4a82b5;
+        }
+
+        #clear,
+        #save,
+        #start {
+            cursor: pointer;
+            border: 0;
+            background: #4a82b5;
+            color: white;
+            font-size: 1em;
+            padding: 10px;
+        }
+
+        #save:hover,
+        #clear:hover,
+        #start:hover {
+            background: #e6eff7;
+            color: #4a82b5;
+        }
+
+        .colors button {
+            border: 0;
+            margin: 2px;
+            display: inline-block;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .colors button:hover {
+            opacity: 0.2;
+        }
+
+        .colors button:nth-of-type(1) {
+            background-color: #000000;
+        }
+
+        .colors button:nth-of-type(2) {
+            background-color: #808080;
+        }
+
+        .colors button:nth-of-type(3) {
+            background-color: #800000;
+        }
+
+        .colors button:nth-of-type(4) {
+            background-color: #808000;
+        }
+
+        .colors button:nth-of-type(5) {
+            background-color: #008000;
+        }
+
+        .colors button:nth-of-type(6) {
+            background-color: #008080;
+        }
+
+        .colors button:nth-of-type(7) {
+            background-color: #000080;
+        }
+
+        .colors button:nth-of-type(8) {
+            background-color: #800080;
+        }
+
+        .colors button:nth-of-type(9) {
+            background-color: #808040;
+        }
+
+        .colors button:nth-of-type(10) {
+            background-color: #004040;
+        }
+
+        .colors button:nth-of-type(11) {
+            background-color: #0080FF;
+        }
+
+        .colors button:nth-of-type(12) {
+            background-color: #00264C;
+        }
+
+        .colors button:nth-of-type(13) {
+            background-color: #4000FF;
+        }
+
+        .colors button:nth-of-type(14) {
+            background-color: #804000;
+        }
+
+        .colors button:nth-of-type(15) {
+            background-color: #ffffff;
+        }
+
+        .colors button:nth-of-type(16) {
+            background-color: #C0C0C0;
+        }
+
+        .colors button:nth-of-type(17) {
+            background-color: #FF0000;
+        }
+
+        .colors button:nth-of-type(18) {
+            background-color: #FFFF00;
+        }
+
+        .colors button:nth-of-type(19) {
+            background-color: #00FF00;
+        }
+
+        .colors button:nth-of-type(20) {
+            background-color: #00FFFF;
+        }
+
+        .colors button:nth-of-type(21) {
+            background-color: #0000FF;
+        }
+
+        .colors button:nth-of-type(22) {
+            background-color: #FF00FF;
+        }
+
+        .colors button:nth-of-type(23) {
+            background-color: #FFFF80;
+        }
+
+        .colors button:nth-of-type(24) {
+            background-color: #00FF80;
+        }
+
+        .colors button:nth-of-type(25) {
+            background-color: #80FFFF;
+        }
+
+        .colors button:nth-of-type(26) {
+            background-color: #8080FF;
+        }
+
+        .colors button:nth-of-type(27) {
+            background-color: #FF0080;
+        }
+
+        .colors button:nth-of-type(28) {
+            background-color: #FF8040;
+        }
+
+        .brushThickness button {
+            border: none;
+            width: 65px;
+            height: 15px;
+            cursor: pointer;
+            display: block;
+        }
+
+        .brushThickness button:hover {
+            opacity: 0.3;
+        }
+
+        .brushThickness button:after {
+            height: 5px;
+            display: block;
+            content: '';
+            background-color: #000000;
+        }
+
+        .brushThickness button:nth-of-type(1):after {
+            height: 1px;
+        }
+
+        .brushThickness button:nth-of-type(2):after {
+            height: 2px;
+        }
+
+        .brushThickness button:nth-of-type(3):after {
+            height: 3px;
+        }
+
+        .brushThickness button:nth-of-type(4):after {
+            height: 4px;
+        }
+
+        .brushThickness button:nth-of-type(5):after {
+            height: 5px;
+        }
+    </style>
+    <script src="jquery.js"></script>
+</head>
+
+<body>
+    <div id="toolbar">
+        <div id="col1">
+            <div class="colors">
+                <button type="button" value="#000000" id="colorWell"></button>
+                <button type="button" value="#808080" id="colorWell"></button>
+                <button type="button" value="#800000" id="colorWell"></button>
+                <button type="button" value="#808000"></button>
+                <button type="button" value="#008000"></button>
+                <button type="button" value="#008080"></button>
+                <button type="button" value="#000080"></button>
+                <button type="button" value="#800080"></button>
+                <button type="button" value="#808040"></button>
+                <button type="button" value="#004040"></button>
+                <button type="button" value="#0080FF"></button>
+                <button type="button" value="#00264C"></button>
+                <button type="button" value="#4000FF"></button>
+                <button type="button" value="#804000"></button>
+                <br>
+                <button type="button" value="#ffffff"></button>
+                <button type="button" value="#C0C0C0"></button>
+                <button type="button" value="#FF0000"></button>
+                <button type="button" value="#FFFF00"></button>
+                <button type="button" value="#00FF00"></button>
+                <button type="button" value="#00FFFF"></button>
+                <button type="button" value="#0000FF"></button>
+                <button type="button" value="#FF00FF"></button>
+                <button type="button" value="#FFFF80"></button>
+                <button type="button" value="#00FF80"></button>
+                <button type="button" value="#80FFFF"></button>
+                <button type="button" value="#8080FF"></button>
+                <button type="button" value="#FF0080"></button>
+                <button type="button" value="#FF8040"></button>
+            </div>
+            <div class="textField">
+                <button type="button" value="20">A</button>
+                <button type="button" value="40">A</button>
+                <button type="button" value="60">A</button>
+            </div>
+        </div>
+
+        <div id="col2">
+            <div class="brushThickness">
+                <button type="button" value="1"></button>
+                <button type="button" value="2"></button>
+                <button type="button" value="3"></button>
+                <button type="button" value="4"></button>
+                <button type="button" value="5"></button>
+            </div>
+        </div>
+
+        <div id="col3">
+            <button id="save">Save</button>
+            <button id="clear">Clear</button>
+        </div>
+    </div>
+
+
+    <canvas id="canvas" width="1900" height="800"></canvas>
+
+    <div id="info">
+        <p>在?</p>
+        <p>画个画?</p>
+        <button id="start">开始</button>
+    </div>
+
+</body>
+<script>
+    var c = document.getElementById('canvas');
+    var ctx = c.getContext("2d");
+    var pos = { x: 0, y: 0 };
+    var isDrawing = false;
+    var fontStyle = 'arial';
+    ctx.strokeStyle = "#ff0000";
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+    ctx.font = "20px Arial";
+    var chosenColor = "#ff0000";
+
+
+    /////////////////// Color Change Event Handler
+    var colorWell = document.getElementsByClassName('colors')[0];
+
+    colorWell.addEventListener('click', function (event) {
+        ctx.strokeStyle = event.target.value;
+        chosenColor = event.target.value;
+    });
+
+    /////////////////// Brush Thickness Event Handler
+    var brushThickness = document.getElementsByClassName('brushThickness')[0];
+
+    brushThickness.addEventListener('click', function (event) {
+        ctx.lineWidth = event.target.value;
+    });
+
+    /////////////////// Text Event Handlers
+    var textField = document.getElementsByClassName('textField')[0];
+
+    textField.addEventListener('click', function (event) {
+        ctx.font = event.target.value + "px Arial";
+    });
+
+    document.addEventListener('dblclick', function (event) {
+        var textStr = '';
+        fontStyle = event.target.value;
+        setPosition(event);
+
+        // on click of else where of window OR if "enter" is pressed, clear string
+        $(window).on('keypress', function (e) {
+            document.addEventListener('click', function () { textStr = ''; });
+            var code = (e.keyCode ? e.keyCode : e.which);
+            if (code == 13) {
+                console.log(textStr);
+                textStr = '';  // clear text for next
+                return;
+            }
+            // otherwise, continue appending
+            else {
+                textStr = textStr + String.fromCharCode(e.keyCode);
+            }
+            ctx.fillStyle = chosenColor;
+            ctx.fillText(textStr, pos.x, pos.y);
+        });
+    });
+
+    /////////////////// Window resize event handler
+    window.addEventListener('resize', resize);
+
+    function resize() {
+        c.height = window.innerHeight;
+        c.width = window.innerWidth;
+    }
+
+    /////////////////// Set Position and accounts for toolbar height
+    function setPosition(e) {
+        pos.x = e.clientX;
+        var tbHeight = $('#toolbar').height();
+        pos.y = e.clientY - tbHeight;
+    }
+
+    /////////////////// Drawing handlers 
+
+    // Mouse Down Event
+    document.addEventListener('mousedown', function (event) {
+        setPosition(event);
+        isDrawing = true;
+
+        // Start Drawing
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+    });
+
+    // Mouse Up Event
+    document.addEventListener('mouseup', function (event) {
+        setPosition(event);
+        isDrawing = false;
+    });
+
+    document.addEventListener('mousemove', draw);
+
+    function draw(e) {
+        ctx.beginPath();
+        //Move From
+        if (isDrawing) {
+            ctx.moveTo(pos.x, pos.y);
+            setPosition(e);
+            //Move To
+            ctx.lineTo(pos.x, pos.y);
+            //Draw
+            ctx.stroke();
+        }
+    }
+
+    /////////////////// clear on click
+    $("#clear").click(function () {
+        ctx.clearRect(0, 0, c.width, c.height);
+    });
+
+    /////////////////// save on click
+    $("#save").click(function () {
+        html = "<img src='" + c.toDataURL() + "' alt='drawing'/>";
+        var tab = window.open();
+        tab.document.write(html);
+    });
+
+    $("#start").click(function () {
+        var el = document.getElementById('info');
+        el.style.display = "none";
+    });
+</script>
+
+</html>
